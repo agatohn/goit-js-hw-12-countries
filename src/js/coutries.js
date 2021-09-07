@@ -5,8 +5,7 @@ import { debounce } from 'lodash';
 import makeCountrylist from '../templates/countries_list.hbs';
 import Handlebars from 'handlebars';
 import { error } from '@pnotify/core';
-import '@pnotify/core/dist/PNotify.css';
-console.log(error);
+
 const refs = getRefs('#countries');
 
 const printResult = (result = '', err = '') => {
@@ -26,8 +25,17 @@ const getCountry = e => {
         return renderCountriesList(data);
       }
       if (data.length > 10) {
+        printResult('', '');
         return error({
+          delay: '4000',
           text: 'Too many matches found. Please enter a more specific query!',
+        });
+      }
+      if (data.status === 404) {
+        printResult('', '');
+        return error({
+          delay: '4000',
+          text: 'Error 404! No such country for your query!',
         });
       }
     })
@@ -52,7 +60,7 @@ const renderCountry = ({ name, capital, population, languages, flag }) => {
 };
 
 const handleError = err => {
-  printResult('', err.info);
+  printResult('', err.status);
 };
 
 refs.form.addEventListener('input', debounce(getCountry, 500));
