@@ -4,8 +4,15 @@ import makeCountryMarkup from '../templates/country.hbs';
 import { debounce } from 'lodash';
 import makeCountrylist from '../templates/countries_list.hbs';
 import Handlebars from 'handlebars';
-
+import { error } from '@pnotify/core';
+import '@pnotify/core/dist/PNotify.css';
+console.log(error);
 const refs = getRefs('#countries');
+
+const printResult = (result = '', err = '') => {
+  refs.result.innerHTML = result;
+  refs.errorRef.textContent = err;
+};
 
 const getCountry = e => {
   e.preventDefault();
@@ -15,8 +22,13 @@ const getCountry = e => {
       if (data.length === 1) {
         return renderCountry(data[0]);
       }
-      if (data.length >= 2 || data.length <= 10) {
+      if (data.length >= 2 && data.length <= 10) {
         return renderCountriesList(data);
+      }
+      if (data.length > 10) {
+        return error({
+          text: 'Too many matches found. Please enter a more specific query!',
+        });
       }
     })
     .catch(handleError);
@@ -41,11 +53,6 @@ const renderCountry = ({ name, capital, population, languages, flag }) => {
 
 const handleError = err => {
   printResult('', err.info);
-};
-
-const printResult = (result = '', err = '') => {
-  refs.result.innerHTML = result;
-  refs.errorRef.textContent = err;
 };
 
 refs.form.addEventListener('input', debounce(getCountry, 500));
