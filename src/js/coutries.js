@@ -52,7 +52,7 @@ const renderCountry = ({ name, capital, population, languages, flag }) => {
     capital: capital,
     population: population,
     icon: flag,
-    languages: languages[0].name,
+    languages: languages,
   };
 
   const markup = makeCountryMarkup(preparedData, Handlebars);
