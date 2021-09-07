@@ -22,6 +22,7 @@ const getCountry = e => {
     .catch(handleError);
 };
 const renderCountriesList = data => {
+  printResult('', '');
   refs.result.insertAdjacentHTML('beforeend', makeCountrylist(data, Handlebars));
 };
 
