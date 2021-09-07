@@ -2,15 +2,28 @@ import getRefs from './services/getRefs';
 import { fetchCountry } from './services/api-service';
 import makeCountryMarkup from '../templates/country.hbs';
 import { debounce } from 'lodash';
-import makeCountrylist from '../templates/countries_list.hbs';
-// import Handlebars from 'handlebars';
+import makeCountrylist from '../templates/countrieslist.hbs';
+import Handlebars from 'handlebars';
 
 const refs = getRefs('#countries');
 
 const getCountry = e => {
   e.preventDefault();
   const country = e.target.value;
-  fetchCountry(country).then(renderCountry).catch(handleError);
+  fetchCountry(country)
+    .then(data => {
+      if (data.length === 1) {
+        return renderCountry(data[0]);
+      }
+      if (data.length >= 2 || data.length <= 10) {
+        return renderCountriesList(data);
+      }
+    })
+    .catch(handleError);
+};
+const renderCountriesList = data => {
+  const markup = makeCountrylist(data, Handlebars);
+  printResult(markup);
 };
 
 const renderCountry = ({ name, capital, population, languages, flag }) => {
@@ -22,7 +35,7 @@ const renderCountry = ({ name, capital, population, languages, flag }) => {
     languages: languages[0].name,
   };
 
-  const markup = makeCountryMarkup(preparedData);
+  const markup = makeCountryMarkup(preparedData, Handlebars);
   printResult(markup);
 };
 
