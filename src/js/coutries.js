@@ -2,7 +2,7 @@ import getRefs from './services/getRefs';
 import { fetchCountry } from './services/api-service';
 import makeCountryMarkup from '../templates/country.hbs';
 import { debounce } from 'lodash';
-import makeCountrylist from '../templates/countrieslist.hbs';
+import makeCountrylist from '../templates/countries_list.hbs';
 import Handlebars from 'handlebars';
 
 const refs = getRefs('#countries');
@@ -22,8 +22,7 @@ const getCountry = e => {
     .catch(handleError);
 };
 const renderCountriesList = data => {
-  const markup = makeCountrylist(data, Handlebars);
-  printResult(markup);
+  refs.result.insertAdjacentHTML('beforeend', makeCountrylist(data, Handlebars));
 };
 
 const renderCountry = ({ name, capital, population, languages, flag }) => {
