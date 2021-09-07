@@ -11,21 +11,15 @@
 </head>
 
 <body>
-  <ol>
-    <li>
-      <p class="api-name">
-        Get current weather in city by
-        <a href="https://weatherstack.com/">Weatherstack API</a>
-      </p>
-      <div class="container" id="countries">
-        <form class="search-form">
-          <input type="text" name="country" placeholder="Enter country" />
-        </form>
-        <div class="result weather" style="padding-top: 20px"></div>
-        <p class="error"></p>
-      </div>
-    </li>
-  </ol>
+
+  <div class="container" id="countries">
+    <form class="search-form">
+      <input type="text" name="country" placeholder="Enter country" />
+    </form>
+    <ul class="result"></ul>
+    <p class="error"></p>
+  </div>
+
 
   <!-- Скрипт идёт последним в разметке. В нём уже подключен главный SASS-файл. -->
   <script src="./index.js"></script>
