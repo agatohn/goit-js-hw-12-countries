@@ -1,0 +1,16 @@
+<thead>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>City</th>
+  </tr>
+</thead>
+<tbody>
+  {{#each this}}
+    <tr>
+      <td>{{name}}</td>
+      <td>{{email}}</td>
+      <td>{{address.city}}</td>
+    </tr>
+  {{/each}}
+</tbody>
