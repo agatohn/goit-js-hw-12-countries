@@ -11,13 +11,9 @@ const fetchCountry = country => {
       if (data.length === 1) {
         return data[0];
       }
-      if (data.length >= 2 || data.length <= 10) {
-        return data;
-      }
-      if (data.length > 10) {
-        return alert({ text: 'Too many matches found. Enter more!' });
-      }
-      // return data[0];
+      // if (data.length >= 2 || data.length <= 10) {
+      //   return data;
+      // }
     });
 };
 
