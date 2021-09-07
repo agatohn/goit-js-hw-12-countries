@@ -1,16 +1,26 @@
 ul {
   list-style: none;
-  margin-left: 40;
+  margin-left: 40px;
   padding: 0;
 }
 
-p {  
-  margin-left: 40;  
+p {
+  margin-left: 40;
+}
+
+h4 {
+  font-weight: 900;
 }
 
 body {
   background-color: lightblue;
-  color: grey;
+  color: rgb(14, 13, 13);
   font-size: 14px;
   line-height: 2;
+  font-weight: 600;
+}
+
+input {
+  margin: 40px 40px 0px 40px;
+  border: 5px solid tomato;
 }

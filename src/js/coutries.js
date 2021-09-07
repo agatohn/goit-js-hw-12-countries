@@ -27,14 +27,14 @@ const getCountry = e => {
       if (data.length > 10) {
         printResult('', '');
         return error({
-          delay: '4000',
+          delay: '2000',
           text: 'Too many matches found. Please enter a more specific query!',
         });
       }
       if (data.status === 404) {
         printResult('', '');
         return error({
-          delay: '4000',
+          delay: '1000',
           text: 'Error 404! No such country for your query!',
         });
       }
