@@ -1,33 +1,34 @@
 import getRefs from './services/getRefs';
 import { fetchCountry } from './services/api-service';
-import makeWeatherMarkup from '../templates/3-weather.hbs';
+import makeCountryMarkup from '../templates/country.hbs';
 
 const refs = getRefs('#countries');
 
-const getWeather = e => {
+const getCountry = e => {
   e.preventDefault();
-  const city = e.currentTarget.elements.city.value;
-  if (!city) {
+  const country = e.currentTarget.elements.country.value;
+  if (!country) {
     printResult();
     // refs.errorRef.textContent = '';
     // refs.result.innerHTML = '';
 
-    alert('Enter city!');
+    alert('Enter country!');
     return;
   }
-  fetchWeather(city).then(renderWeather).catch(handleError);
+  fetchCountry(country).then(renderCountry).catch(handleError);
 };
 
-const renderWeather = ({ request, current, location }) => {
+const renderCountry = ({ name, capital, population, languages, flag }) => {
   const preparedData = {
-    place: request.query,
-    time: location.localtime,
-    temp: current.temperature,
-    desc: current.weather_descriptions[0],
-    icon: current.weather_icons[0],
+    country: name,
+    capital: capital,
+    population: population,
+    icon = flag,
+    languages: languages.name,
+
   };
 
-  const markup = makeWeatherMarkup(preparedData);
+  const markup = makeCountryMarkup(preparedData);
   printResult(markup);
   // refs.result.innerHTML = makeWeatherMarkup(preparedData);
   // refs.errorRef.textContent = '';
@@ -44,7 +45,7 @@ const printResult = (result = '', err = '') => {
   refs.errorRef.textContent = err;
 };
 
-refs.form.addEventListener('submit', getWeather);
+refs.form.addEventListener('input', getCountry);
 
 // const markupSample = `
 // <div>

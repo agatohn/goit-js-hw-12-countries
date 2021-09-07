@@ -1,7 +1,7 @@
 const BASE_COUNTRIES_URL = 'https://restcountries.eu/rest/v2/name/';
 
-const fetchCountry = city => {
-  const searchParams = city.toString().toLowerCase(),
+const fetchCountry = country => {
+  const searchParams = country.toString().toLowerCase(),
   
 
   return fetch(`${BASE_COUNTRIES_URL}${searchParams}`)
